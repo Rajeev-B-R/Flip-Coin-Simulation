@@ -2,19 +2,33 @@ echo "**********Welcome to Flip Coin Simulation**********"
 
 #!/bin/bash -x
 
-heads=0;
-tails=0;
+heads=0
+tails=0
 
-for (( noTrails=1; noTrails<=20; noTrails++ ))
-do	
-        number=$((RANDOM%2))
-        if [ $number -eq 1 ]
-        then
-                (( heads ++ ))
-                echo "Head count: $heads"
-        else
-                (( tails ++ ))
-                echo "Tail count: $tails"
-        fi
+while [ $heads -ne 21 -a $tails -ne 21 ]
+do
+	number=$(($RANDOM%2))
+	if [ $number -eq 1 ]
+	then
+		echo "Heads"
+		heads=$(($heads+1))
+	else
+		echo "Tails"
+		tails=$(($tails+1))
+	fi
 done
 
+echo "Heads count: $heads"
+echo "Tails count: $tails"
+ 
+if [ $heads -gt $tails ]
+then
+	diff=$(($heads-$tails))
+	echo "Head wins by: $diff"
+elif [ $tails -gt $heads ]
+then
+	diff=$(($tails-$heads))
+	echo "Tail wins by: $diff"
+else
+	echo "Tie!"
+fi
