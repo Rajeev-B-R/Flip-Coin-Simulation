@@ -29,6 +29,24 @@ elif [ $tails -gt $heads ]
 then
 	diff=$(($tails-$heads))
 	echo "Tail wins by: $diff"
-else
+elif [ $heads -eq $tails ]
+then
 	echo "Tie!"
+	while [ true ]
+        do
+        	toss=$(($RANDOM%2))
+                if [ $toss==1 ]
+                then
+                	heads=$(($heads+1))
+                else
+                        tails=$(($tails+1))
+                fi
+                if [ $(($heads-$tails)) -eq 2 ]
+                then
+                	echo "Head wins by 2 and count:" $heads
+                elif [ $(($tails-$heads)) -eq 2 ]
+                then
+                	echo "Tail wins by 2 and count:" $tails
+                fi
+	done
 fi
